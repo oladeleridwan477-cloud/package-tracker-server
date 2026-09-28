@@ -8,8 +8,8 @@ datasource db {
 }
 
 model Shipment {
-  id                String   @id @default(cuid())
-  trackingNumber    String   @unique
+  id                String            @id @default(cuid())
+  trackingNumber    String            @unique
   senderName        String
   senderAddress     String
   receiverName      String
@@ -19,9 +19,8 @@ model Shipment {
   status            String
   currentLocation   String
   estimatedDelivery DateTime
-  createdAt         DateTime @default(now())
-
-  histories TrackingHistory[]
+  createdAt         DateTime          @default(now())
+  histories         TrackingHistory[]
 }
 
 model TrackingHistory {
@@ -30,10 +29,10 @@ model TrackingHistory {
   status      String
   description String
   createdAt   DateTime @default(now())
-
-  shipmentId String
-  shipment   Shipment @relation(fields: [shipmentId], references: [id], onDelete: Cascade)
+  shipmentId  String
+  shipment    Shipment @relation(fields: [shipmentId], references: [id], onDelete: Cascade)
 }
+
 model Admin {
   id        String   @id @default(cuid())
   username  String   @unique
